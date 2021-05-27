@@ -19,10 +19,11 @@ const knownHooks = [
   "post-rewrite",
   "pre-push",
 ];
+const rootDir = path.resolve(__dirname, "..");
 const basename = (n) => path.basename(n, ".sh");
 const isHook = (n) => knownHooks.indexOf(basename(n)) !== -1;
-const newHooks = (n) => path.join(__dirname, `hooks/${n || ""}`);
-const hooks = (n) => path.join(__dirname, `.git/hooks/${n || ""}`);
+const newHooks = (n) => path.join(rootDir, `hooks/${n || ""}`);
+const hooks = (n) => path.join(rootDir, `.git/hooks/${n || ""}`);
 const isGHook = (hook) =>
   isHook(hook) &&
   fs.readFileSync(hook, "utf-8").indexOf("#!/usr/bin/env node") === 0;
